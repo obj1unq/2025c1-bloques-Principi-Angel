@@ -16,8 +16,27 @@ describe "pepita volar" {
     assert.that( miAsserter.assertException( { pepita.volar(1000) } ))
   }
 
-  // test "pepita come alpiste, vuela 5 y la energia le queda en 105"
-  //   roque.rutina({roque.pepita.alimentar(alpiste) ; roque.pepita.hacerVolar(5)})
-  //   roque.entrenar()
-  //   assert.equals(105, pepita.energia())
+  test "pepita come alpiste, vuela 5 y la energia le queda en 105"{   
+    roque.rutina(
+      {roque.alimentar(alpiste)
+      roque.hacerVolar(5)}
+      )
+    roque.entrenar()
+    assert.equals(105, pepita.energia())
+  }
+
+  test "pepita come alpiste, vuela 1000 y come alpiste"{   
+     roque.ave(pepita)
+     roque.rutina( { ave =>
+      ave.comer(alpiste)
+      ave.volar(1000)
+      ave.comer(alpiste)
+    }) 
+
+    assert.throwsException({roque.entrenar()})
+
+    assert.equals(120, pepita.energia())
+    
+    //assert.equals(100, pepita.energia()) Esto quizás era lo que quería!
+  }
 }
